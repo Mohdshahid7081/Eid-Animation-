@@ -1,19 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eid Mubarak</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:0;
+    height:100vh;
+    overflow:hidden;
+    font-family:Arial;
+    background:linear-gradient(135deg,#000428,#004e92);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+}
+
+.container{
+    animation:fade 2s ease;
+}
+
+h1{
+    font-size:55px;
+    color:gold;
+    text-shadow:0 0 20px gold;
+    animation:glow 2s infinite alternate;
+}
+
+p{
+    font-size:25px;
+}
+
+#userName{
+    color:#00ffcc;
+    font-size:35px;
+    margin-top:10px;
+}
+
+button{
+    margin-top:20px;
+    padding:15px 30px;
+    border:none;
+    border-radius:40px;
+    background:#25D366;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 0 20px #25D366;
+}
+
+.watermark{
+    position:fixed;
+    bottom:10px;
+    right:15px;
+    color:white;
+    opacity:0.7;
+    font-size:18px;
+}
+
+@keyframes glow{
+    from{
+        text-shadow:0 0 10px gold;
+    }
+    to{
+        text-shadow:0 0 30px white;
+    }
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:scale(0.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+</style>
 </head>
 
-<body style="background:black;color:white;text-align:center;margin-top:100px;">
+<body>
+
+<div class="container">
 
 <h1>Eid Mubarak 🌙</h1>
 
-<button onclick="showName()">Click Here</button>
+<p>May Allah bless you and your family</p>
+
+<div id="userName"></div>
+
+<button onclick="shareWhatsApp()">
+Share on WhatsApp
+</button>
+
+</div>
+
+<div class="watermark">
+  <i>
+@itz.dark.soul2026
+  </i>
+</div>
 
 <script>
-function showName(){
-alert("Eid Mubarak From Shahid");
+
+const params = new URLSearchParams(window.location.search);
+const name = params.get("name");
+
+if(name){
+    document.getElementById("userName").innerHTML =
+    "🎉 " + name;
 }
+
+function shareWhatsApp(){
+
+    let yourName = prompt("Apna naam likho");
+
+    if(yourName){
+
+        let link =
+window.location.origin +
+window.location.pathname +
+"?name=" +
+encodeURIComponent(yourName);
+
+        let message =
+"Eid Mubarak 🌙\n\n" +
+"Special Greeting For You 👇\n" +
+link;
+
+        window.open(
+"https://wa.me/?text=" +
+encodeURIComponent(message),
+"_blank"
+);
+
+    }
+
+}
+
 </script>
 
 </body>
