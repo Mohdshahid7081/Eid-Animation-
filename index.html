@@ -3,174 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Eid Mubarak</title>
 
 <style>
-
 body{
     margin:0;
     padding:0;
-    height:100vh;
+    font-family:Georgia, serif;
+    text-align:center;
+    color:white;
+
     background:url('762616c8fea72d938be5be8c582e4b63.jpg');
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-    font-family:Arial;
-    text-align:center;
-    overflow:hidden;
+    min-height:100vh;
 }
 
-.container{
-    padding-top:70px;
+.overlay{
+    background:rgba(0,0,0,0.35);
+    min-height:100vh;
+    padding-top:60px;
 }
 
 h1{
     color:gold;
-    font-size:75px;
+    font-size:70px;
     font-style:italic;
     text-shadow:0 0 20px gold;
     margin-bottom:10px;
 }
 
 .moon{
-    font-size:120px;
-    color:gold;
-    margin-top:-40px;
-    text-shadow:0 0 20px orange;
+    font-size:100px;
+    color:#ffcc00;
+    margin-top:-30px;
 }
 
-p{
-    color:white;
-    font-size:45px;
+.line{
+    font-size:42px;
     font-style:italic;
     text-shadow:0 0 15px black;
-    margin-top:-20px;
+    margin:20px;
 }
 
 input{
     width:80%;
-    padding:18px;
+    max-width:500px;
+    padding:20px;
     border:none;
     border-radius:50px;
-    font-size:35px;
+    font-size:28px;
     text-align:center;
-    margin-top:30px;
-    outline:none;
     font-style:italic;
+    margin-top:20px;
+}
+
+.username{
+    font-size:55px;
+    color:cyan;
+    font-style:italic;
+    margin-top:40px;
+    text-shadow:0 0 15px cyan;
 }
 
 button{
-    margin-top:35px;
-    padding:18px 40px;
+    margin-top:30px;
+    padding:20px 50px;
     border:none;
     border-radius:50px;
     background:#25D366;
     color:white;
-    font-size:35px;
+    font-size:30px;
     font-style:italic;
-    cursor:pointer;
     box-shadow:0 0 25px #25D366;
 }
 
-#resultName{
-    margin-top:40px;
-    color:#00ffe5;
-    font-size:55px;
-    font-style:italic;
-    text-shadow:0 0 20px black;
-}
-
 .watermark{
-    position:fixed;
-    bottom:15px;
-    right:15px;
-    color:white;
-    font-size:28px;
+    margin-top:80px;
+    font-size:30px;
     font-style:italic;
-    text-shadow:0 0 10px black;
+    color:white;
 }
-
-@media(max-width:600px){
-
-h1{
-    font-size:45px;
-}
-
-.moon{
-    font-size:80px;
-}
-
-p{
-    font-size:28px;
-}
-
-input{
-    font-size:25px;
-}
-
-button{
-    font-size:25px;
-
-
-
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="overlay">
 
 <h1>Eid Mubarak</h1>
 
 <div class="moon">🌙</div>
 
-<p>May Allah bless you and your family</p>
+<div class="line">
+May Allah bless you and your family
+</div>
 
-<input type="text" id="nameInput" placeholder="Naam Likho">
+<input type="text" id="name" placeholder="Naam Likho">
 
-<br>
-    <div id="resultName"></div>
+<div class="username" id="showName">
+✨ Eid Mubarak ✨
+</div>
 
-<button onclick="shareWhatsApp ()">
+<button onclick="shareNow()">
 Share on WhatsApp
 </button>
-
-
-
-</div>
 
 <div class="watermark">
 @itz.dark.soul2026
 </div>
 
+</div>
+
 <script>
 
-function shareWhatsApp(){
+const params = new URLSearchParams(window.location.search);
+const user = params.get("name");
 
-let name = document.getElementById("nameInput").value;
+if(user){
+    document.getElementById("showName").innerHTML =
+    "✨ Eid Mubarak " + user + " ✨";
 
-if(name==""){
-alert("Apna naam likho");
-return;
+    document.getElementById("name").value = user;
 }
 
-document.getElementById("resultName").innerHTML =
-"✨ Eid Mubarak " + name + " ✨";
+document.getElementById("name").addEventListener("input", function(){
+    let value = this.value;
 
-let msg =
-"✨ Eid Mubarak " + name + " ✨\n\n" +
-"https://shahid7081.github.io/Eid-Animation-/";
+    if(value==""){
+        document.getElementById("showName").innerHTML =
+        "✨ Eid Mubarak ✨";
+    }else{
+        document.getElementById("showName").innerHTML =
+        "✨ Eid Mubarak " + value + " ✨";
+    }
+});
 
-window.open(
-"https://wa.me/?text=" + encodeURIComponent(msg),
-"_blank"
-);
+function shareNow(){
 
+    let name = document.getElementById("name").value;
+
+    if(name==""){
+        alert("Pehle naam likho");
+        return;
+    }
+
+    let url =
+    "https://shahid7081.github.io/Eid-Animation-/?name="
+    + encodeURIComponent(name);
+
+    let text =
+    "✨ Eid Mubarak " + name + " ✨\n\n"
+    + "Special Eid Greeting For You 🌙\n\n"
+    + url;
+
+    window.open(
+    "https://wa.me/?text=" + encodeURIComponent(text),
+    "_blank"
+    );
 }
 
 </script>
+
 </body>
 </html>
