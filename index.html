@@ -108,43 +108,31 @@ Share on WhatsApp
   </i>
 </div>
 
+
 <script>
+function saveName(){
+  let user = document.getElementById("nameInput").value;
 
-const params = new URLSearchParams(window.location.search);
-const name = params.get("name");
+  if(user==""){
+    alert("Naam likho 😄");
+    return;
+  }
 
-if(name){
-    document.getElementById("userName").innerHTML =
-    "🎉 " + name;
+  document.getElementById("userName").innerHTML =
+    "✨ Eid Mubarak, " + user + " ✨";
+
+  document.getElementById("nameBox").style.display="none";
 }
 
 function shareWhatsApp(){
+  let text =
+  "✨ Eid Mubarak ✨\nVisit this greeting:\n" + window.location.href;
 
-    let yourName = prompt("Apna naam likho");
-
-    if(yourName){
-
-        let link =
-window.location.origin +
-window.location.pathname +
-"?name=" +
-encodeURIComponent(yourName);
-
-        let message =
-"Eid Mubarak 🌙\n\n" +
-"Special Greeting For You 👇\n" +
-link;
-
-        window.open(
-"https://wa.me/?text=" +
-encodeURIComponent(message),
-"_blank"
-);
-
-    }
-
+  window.open(
+    "https://wa.me/?text=" + encodeURIComponent(text),
+    "_blank"
+  );
 }
-
 </script>
 
 </body>
