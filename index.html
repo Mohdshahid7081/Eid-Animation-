@@ -142,28 +142,23 @@ document.getElementById("name").addEventListener("input", function(){
 
 function shareNow(){
 
-    let name = document.getElementById("name").value;
+let name = document.getElementById("name").value;
 
-    if(name==""){
-        alert("Pehle naam likho");
-        return;
-    }
-
-    let url =
-"https://mohdshahid7081.github.io/Eid-Animation-/?name="
-+ encodeURIComponent(name);
-
-    let text =
-    "✨ Eid Mubarak " + name + " ✨\n\n"
-    + "Special Eid Greeting For You 🌙\n\n"
-    + url;
-
-    window.open(
-    "https://wa.me/?text=" + encodeURIComponent(text),
-    "_blank"
-    );
+if(name==""){
+alert("Pehle naam likho");
+return;
 }
 
+let link = "https://mohdshahid7081.github.io/Eid-Animation-/?name=" + encodeURIComponent(name);
+
+let message = "✨ Eid Mubarak " + name + " ✨\n\n" + link;
+
+window.open(
+"https://wa.me/?text=" + encodeURIComponent(message),
+"_blank"
+);
+
+}
 </script>
 
 </body>
