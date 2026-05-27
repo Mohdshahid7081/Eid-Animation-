@@ -159,8 +159,9 @@ return;
 
 document.getElementById("resultName").innerHTML =
 "✨ Eid Mubarak " + name + " ✨";
-
-let msg = "✨ Eid Mubarak " + name + " ✨";
+let msg =
+"✨ Eid Mubarak " + name + " ✨\n\n" +
+window.location.href;
 
 window.open(
 "https://wa.me/?text=" + encodeURIComponent(msg),
