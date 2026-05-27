@@ -6,6 +6,11 @@
 
 <title>Eid Mubarak</title>
 
+<meta property="og:title" content="✨ Eid Mubarak ✨">
+<meta property="og:description" content="Special Eid Greeting For You 🌙">
+<meta property="og:image" content="./762616c8fea72d938be5be8c582e4b63.jpg">
+<meta property="og:type" content="website">
+
 <style>
 
 body{
@@ -17,78 +22,119 @@ justify-content:center;
 align-items:center;
 text-align:center;
 font-family:Arial;
-overflow:hidden;
-color:white;
 
 background:url('./762616c8fea72d938be5be8c582e4b63.jpg');
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
+overflow:hidden;
 }
 
-.overlay{
-background:rgba(0,0,0,0.25);
+.container{
 width:100%;
-height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
+padding:20px;
 }
 
 h1{
-font-size:55px;
-color:gold;
+font-size:60px;
+color:#FFD700;
+font-style:italic;
 text-shadow:0 0 20px gold;
-margin:0;
+margin-bottom:10px;
+animation: glow 2s infinite alternate;
+}
+
+.moon{
+font-size:80px;
+margin-bottom:20px;
+animation: float 2s infinite ease-in-out;
 }
 
 p{
-font-size:30px;
+font-size:35px;
+color:white;
 font-style:italic;
-text-shadow:0 0 10px black;
-margin-top:20px;
+font-weight:bold;
+line-height:1.3;
+text-shadow:0 0 15px black;
+margin-bottom:40px;
 }
 
-#userName{
+#showName{
 font-size:38px;
-margin-top:20px;
+color:#00ffcc;
 font-weight:bold;
-text-shadow:0 0 10px black;
-color:white;
+margin-top:20px;
+text-shadow:0 0 15px black;
+animation: zoom 1s ease;
 }
 
 input{
-padding:12px;
-width:220px;
+width:80%;
+max-width:380px;
+padding:18px;
 border:none;
-border-radius:25px;
-font-size:18px;
-text-align:center;
+border-radius:40px;
 outline:none;
-margin-top:25px;
+font-size:22px;
+text-align:center;
+font-style:italic;
+margin-bottom:20px;
 }
 
 button{
-margin-top:20px;
-padding:14px 28px;
+padding:18px 35px;
 border:none;
-border-radius:35px;
+border-radius:40px;
 background:#25D366;
 color:white;
-font-size:20px;
+font-size:22px;
+font-style:italic;
 cursor:pointer;
 box-shadow:0 0 20px #25D366;
+margin:10px;
 }
 
 .watermark{
 position:fixed;
-bottom:10px;
+bottom:15px;
 right:15px;
 font-size:22px;
 color:white;
-opacity:0.8;
 font-style:italic;
+text-shadow:0 0 10px black;
+}
+
+@keyframes glow{
+from{
+text-shadow:0 0 10px gold;
+}
+to{
+text-shadow:0 0 30px white;
+}
+}
+
+@keyframes float{
+0%{
+transform:translateY(0px);
+}
+50%{
+transform:translateY(-10px);
+}
+100%{
+transform:translateY(0px);
+}
+}
+
+@keyframes zoom{
+from{
+transform:scale(0);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
 }
 
 </style>
@@ -96,21 +142,29 @@ font-style:italic;
 
 <body>
 
-<body>
+<div class="container">
 
-<div class="overlay">
+<h1>Eid Mubarak</h1>
 
-<h1>Eid Mubarak 🌙</h1>
+<div class="moon">🌙</div>
 
-<p>May Allah bless you and your family</p>
+<p>
+May Allah bless you and your family
+</p>
 
-<div id="userName"></div>
+<input type="text" id="nameInput" placeholder="Apna Naam Likho">
 
-<input type="text" id="nameInput" placeholder="Naam Likho">
+<br>
 
-<button onclick="shareWish()">
+<button onclick="showName()">
+Show Name
+</button>
+
+<button onclick="shareWhatsApp()">
 Share on WhatsApp
 </button>
+
+<div id="showName"></div>
 
 </div>
 
@@ -118,43 +172,41 @@ Share on WhatsApp
 @itz.dark.soul2026
 </div>
 
-
-
 <script>
 
-const params = new URLSearchParams(window.location.search);
-const name = params.get("name");
+function showName(){
 
-if(name){
-document.getElementById("userName").innerHTML =
-"✨ Eid Mubarak " + name +" ✨";
-}
+let name = document.getElementById("nameInput").value;
 
-function shareWish(){
-
-let user =
-document.getElementById("nameInput").value;
-
-if(user==""){
-alert("Naam likho 😊");
+if(name==""){
+alert("Pehle Naam Likho");
 return;
 }
 
+document.getElementById("showName").innerHTML =
+"✨ Eid Mubarak " + name + " ✨";
+
+}
+
+function shareWhatsApp(){
+
+let name = document.getElementById("nameInput").value;
+
+if(name==""){
+alert("Pehle Naam Likho");
+return;
+}
+
+let msg =
+"✨ Eid Mubarak ✨\n\n" +
+"🌙 May Allah bless you and your family 🌙\n\n" +
+"From : " + name + "\n\n" +
+window.location.href;
+
 let url =
-window.location.origin +
-window.location.pathname +
-"?name=" + encodeURIComponent(user);
+"https://wa.me/?text=" + encodeURIComponent(msg);
 
-let text =
-"🌙 Eid Mubarak 🌙\n" +
-"Open this greeting 👇\n" +
-url;
-
-window.open(
-"https://wa.me/?text=" +
-encodeURIComponent(text),
-"_blank"
-);
+window.open(url,'_blank');
 
 }
 
