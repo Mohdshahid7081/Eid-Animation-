@@ -135,12 +135,13 @@ button{
 <input type="text" id="nameInput" placeholder="Naam Likho">
 
 <br>
+    <div id="resultName"></div>
 
 <button onclick="shareWhatsApp ()">
 Share on WhatsApp
 </button>
 
-<div id="resultName"></div>
+
 
 </div>
 
@@ -150,27 +151,27 @@ Share on WhatsApp
 
 <script>
 
-function shareWhatsApp (){
+function shareWhatsApp(){
 
 let name = document.getElementById("nameInput").value;
 
 if(name==""){
 alert("Apna naam likho");
+return;
 }
-else{
 
 document.getElementById("resultName").innerHTML =
 "✨ Eid Mubarak " + name + " ✨";
 
-let msg = "✨ Eid Mubarak " + name + " ✨ " + window.location.href;
+let msg = "✨ Eid Mubarak " + name + " ✨";
 
-window.open("https://wa.me/?text=" + encodeURIComponent(msg));
-
-}
+window.open(
+"https://wa.me/?text=" + encodeURIComponent(msg),
+"_blank"
+);
 
 }
 
 </script>
-
 </body>
 </html>
