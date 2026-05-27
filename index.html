@@ -60,13 +60,13 @@ text-shadow:0 0 15px black;
 margin-bottom:40px;
 }
 
-#showName{
-font-size:38px;
-color:#00ffcc;
-font-weight:bold;
-margin-top:20px;
-text-shadow:0 0 15px black;
-animation: zoom 1s ease;
+#resultName{
+    color:#00ffe5;
+    font-size:45px;
+    font-style:italic;
+    text-shadow:0 0 15px black;
+    margin-top:30px;
+
 }
 
 input{
@@ -156,8 +156,10 @@ May Allah bless you and your family
 
 <br>
 
+<div id="resultName"></div>
+
 <button onclick="showName()">
-Show Name
+Eid Mubarak
 </button>
 
 <button onclick="shareWhatsApp()">
@@ -183,7 +185,7 @@ alert("Pehle Naam Likho");
 return;
 }
 
-document.getElementById("showName").innerHTML =
+document.getElementById("resultname").innerHTML =
 "✨ Eid Mubarak " + name + " ✨";
 
 }
