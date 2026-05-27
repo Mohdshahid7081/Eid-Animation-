@@ -17,48 +17,78 @@ justify-content:center;
 align-items:center;
 text-align:center;
 font-family:Arial;
+overflow:hidden;
 color:white;
 
-background:url('8a5b46f1a38ae4760a54f6cd6a0c4076.jpg');
+background:url('https://8a5b46f1a38ae4760a54f6cd6a0c4076.jpg');
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
-overflow:hidden;
 }
 
-.container{
+.overlay{
+background:rgba(0,0,0,0.25);
 width:100%;
-padding-top:40px;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+h1{
+font-size:55px;
+color:gold;
+text-shadow:0 0 20px gold;
+margin:0;
+}
+
+p{
+font-size:30px;
+font-style:italic;
+text-shadow:0 0 10px black;
+margin-top:20px;
+}
+
+#userName{
+font-size:38px;
+margin-top:20px;
+font-weight:bold;
+text-shadow:0 0 10px black;
+color:white;
 }
 
 input{
-padding:10px;
-width:180px;
+padding:12px;
+width:220px;
 border:none;
-border-radius:20px;
+border-radius:25px;
 font-size:18px;
 text-align:center;
 outline:none;
+margin-top:25px;
 }
 
 button{
-padding:12px 25px;
+margin-top:20px;
+padding:14px 28px;
 border:none;
-border-radius:30px;
+border-radius:35px;
 background:#25D366;
 color:white;
 font-size:20px;
-margin-left:10px;
 cursor:pointer;
 box-shadow:0 0 20px #25D366;
 }
 
-#userName{
-margin-top:20px;
-font-size:35px;
-font-weight:bold;
+.watermark{
+position:fixed;
+bottom:10px;
+right:15px;
+font-size:22px;
 color:white;
-text-shadow:0 0 10px black;
+opacity:0.8;
+font-style:italic;
 }
 
 </style>
@@ -66,21 +96,19 @@ text-shadow:0 0 10px black;
 
 <body>
 
-<div class="container">
+<div class="overlay">
 
 <h1>Eid Mubarak 🌙</h1>
 
 <p>May Allah bless you and your family</p>
 
+<div id="userName"></div>
+
 <input type="text" id="nameInput" placeholder="Apna Naam Likho">
 
-<br>
-
-<button onclick="saveName()">
-Generate Wish
+<button onclick="shareWish()">
+Share on WhatsApp
 </button>
-
-<div id="userName"></div>
 
 </div>
 
@@ -90,7 +118,15 @@ Generate Wish
 
 <script>
 
-function saveName(){
+const params = new URLSearchParams(window.location.search);
+const name = params.get("name");
+
+if(name){
+document.getElementById("userName").innerHTML =
+"✨ Eid Mubarak " + name + " ✨";
+}
+
+function shareWish(){
 
 let user =
 document.getElementById("nameInput").value;
@@ -100,8 +136,21 @@ alert("Naam likho 😊");
 return;
 }
 
-document.getElementById("userName").innerHTML =
-"✨ Eid Mubarak " + user + " ✨";
+let url =
+window.location.origin +
+window.location.pathname +
+"?name=" + encodeURIComponent(user);
+
+let text =
+"🌙 Eid Mubarak 🌙\n" +
+"Open this greeting 👇\n" +
+url;
+
+window.open(
+"https://wa.me/?text=" +
+encodeURIComponent(text),
+"_blank"
+);
 
 }
 
